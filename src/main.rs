@@ -1,5 +1,6 @@
-use mingrep::{config::Config, run};
+
 use std::{env, process};
+use mingrep::Config;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -8,5 +9,8 @@ fn main() {
         process::exit(1);
     });
 
-    run(config);
+    if let Err(e) = mingrep::run(config) {
+        println!("Error: {e}");
+        process::exit(1);
+    }
 }
